@@ -46,15 +46,15 @@ export const projects: Project[] = [
   },
   {
     name: "restauyacine",
-    url: "https://restauyacine.vercel.app",
-    desc: "SaaS de gestion resto — next.js 16, supabase, stripe, voiceflow",
+    url: "https://restauyacine.vercel.app/login",
+    desc: "SaaS resto — next.js 16, supabase, stripe · clique 'Voir la démo'",
     badge: "live",
   },
-  // TODO: ajoute ici tes autres sites Vercel, par exemple :
-  // { name: "airfryer",     url: "https://airfryer.vercel.app",     desc: "...", badge: "live" },
-  // { name: "cds",          url: "https://cds.vercel.app",          desc: "...", badge: "live" },
-  // { name: "electromed",   url: "https://electromed.vercel.app",   desc: "...", badge: "live" },
+  // Autres sites Vercel disponibles (à activer si tu veux les afficher) :
   // { name: "sas-plu-3d",   url: "https://sas-plu-3d.vercel.app",   desc: "...", badge: "live" },
+  // { name: "cds",          url: "https://cds-dun.vercel.app",      desc: "...", badge: "live" },
+  // { name: "airfryer",     url: "https://airfryer-five.vercel.app", desc: "...", badge: "live" },
+  // { name: "electromed",   url: "https://electromed-stimulation.vercel.app", desc: "...", badge: "live" },
 ];
 
 // Comptes sociaux affichés en bas de la page.
