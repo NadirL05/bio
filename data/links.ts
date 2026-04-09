@@ -1,22 +1,16 @@
 // Source unique de vérité pour la page bio.
 // Pour ajouter/retirer un lien, édite UNIQUEMENT ce fichier puis redéploie.
 //
-// Pour rafraîchir la liste vercelSites :
+// Pour rafraîchir la liste de tes projets Vercel :
 //   vercel login
 //   vercel projects ls
 // puis copie/colle les noms et URLs ci-dessous.
 
-export type Repo = {
+export type Project = {
   name: string;
-  desc: string;
   url: string;
+  desc: string;
   badge?: "WIP" | "live" | "beta";
-};
-
-export type Site = {
-  name: string;
-  url: string;
-  desc: string;
 };
 
 export type Social = {
@@ -40,32 +34,27 @@ export const profile = {
 `.trimEnd(),
 };
 
-// Les 2 repos en cours de dev à mettre en avant.
-export const pinnedRepos: Repo[] = [
+// Tes projets : sites en cours de dev + sites déjà live.
+// Le badge [WIP] / [live] / [beta] distingue l'état de chaque projet.
+// Les 2 vedettes en haut ; ajoute les autres sites Vercel à la suite.
+export const projects: Project[] = [
   {
     name: "agentimpact",
-    desc: "plateforme d'agents IA — vite + react + shadcn/ui",
-    url: "https://github.com/NadirL05/agentimpact",
+    url: "https://www.agentimpact.fr/",
+    desc: "plateforme d'agents IA",
     badge: "WIP",
   },
   {
     name: "restauyacine",
+    url: "https://restauyacine.vercel.app",
     desc: "SaaS de gestion resto — next.js 16, supabase, stripe, voiceflow",
-    url: "https://github.com/NadirL05/restauyacine",
     badge: "live",
   },
-];
-
-// Sites déployés sur Vercel.
-// TODO: rafraîchir cette liste avec la sortie de `vercel projects ls`.
-// Les entrées ci-dessous sont des PLACEHOLDERS — remplace-les par tes vrais déploiements.
-export const vercelSites: Site[] = [
-  {
-    name: "restauyacine",
-    url: "https://restauyacine.vercel.app",
-    desc: "saas resto multi-tenant",
-  },
-  // { name: "<TODO>", url: "https://<TODO>.vercel.app", desc: "<TODO>" },
+  // TODO: ajoute ici tes autres sites Vercel, par exemple :
+  // { name: "airfryer",     url: "https://airfryer.vercel.app",     desc: "...", badge: "live" },
+  // { name: "cds",          url: "https://cds.vercel.app",          desc: "...", badge: "live" },
+  // { name: "electromed",   url: "https://electromed.vercel.app",   desc: "...", badge: "live" },
+  // { name: "sas-plu-3d",   url: "https://sas-plu-3d.vercel.app",   desc: "...", badge: "live" },
 ];
 
 // Comptes sociaux affichés en bas de la page.

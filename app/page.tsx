@@ -1,32 +1,26 @@
 import { TerminalHeader } from "@/components/TerminalHeader";
 import { LinkSection } from "@/components/LinkSection";
 import { LinkButton } from "@/components/LinkButton";
-import { pinnedRepos, vercelSites, socials, profile } from "@/data/links";
+import { projects, socials, profile } from "@/data/links";
 
 export default function Home() {
   return (
     <main className="flex-1 w-full max-w-2xl mx-auto px-5 sm:px-8 py-10 sm:py-16">
       <TerminalHeader />
 
-      <LinkSection title="currently_building" delay={900}>
-        {pinnedRepos.map((r) => (
+      <LinkSection title="projects" delay={900}>
+        {projects.map((p) => (
           <LinkButton
-            key={r.url}
-            label={r.name}
-            url={r.url}
-            desc={r.desc}
-            badge={r.badge}
+            key={p.url}
+            label={p.name}
+            url={p.url}
+            desc={p.desc}
+            badge={p.badge}
           />
         ))}
       </LinkSection>
 
-      <LinkSection title="live_deployments" delay={1200}>
-        {vercelSites.map((s) => (
-          <LinkButton key={s.url} label={s.name} url={s.url} desc={s.desc} />
-        ))}
-      </LinkSection>
-
-      <LinkSection title="find_me" delay={1500}>
+      <LinkSection title="find_me" delay={1200}>
         {socials.map((s) => (
           <LinkButton
             key={s.url}
