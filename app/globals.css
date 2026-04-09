@@ -1,26 +1,161 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Thème terminal vert phosphor */
+  --bg: #0a0a0a;
+  --bg-deep: #050505;
+  --fg: #00ff41;
+  --fg-dim: #008f11;
+  --fg-bright: #39ff14;
+  --accent: #39ff14;
+  --muted: #006400;
+  --danger: #ff003c;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-fg-dim: var(--fg-dim);
+  --color-fg-bright: var(--fg-bright);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: var(--bg-deep);
+  color: var(--fg);
+  font-family: var(--font-geist-mono), ui-monospace, "Menlo", "Monaco", monospace;
+  font-feature-settings: "calt" 0;
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 0 0 2px rgba(0, 255, 65, 0.55), 0 0 8px rgba(0, 255, 65, 0.25);
+}
+
+/* Effet scanlines CRT — lignes horizontales subtiles */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.18) 3px,
+    rgba(0, 0, 0, 0) 4px
+  );
+  z-index: 50;
+  mix-blend-mode: multiply;
+}
+
+/* Glow vignette CRT */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0) 55%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  z-index: 49;
+}
+
+/* Curseur clignotant style terminal */
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.cursor-blink {
+  display: inline-block;
+  animation: blink 1.05s steps(1) infinite;
+  text-shadow: 0 0 6px var(--fg-bright), 0 0 16px var(--fg-bright);
+}
+
+/* Pulse glow pour badges WIP / live / beta */
+@keyframes pulse-glow {
+  0%, 100% {
+    text-shadow: 0 0 2px var(--fg-bright), 0 0 6px var(--fg-bright);
+    opacity: 0.85;
+  }
+  50% {
+    text-shadow: 0 0 6px var(--fg-bright), 0 0 18px var(--fg-bright), 0 0 28px var(--fg-bright);
+    opacity: 1;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.badge-pulse {
+  animation: pulse-glow 2.4s ease-in-out infinite;
+  color: var(--fg-bright);
+}
+
+/* Glitch RGB sur l'ASCII art au hover */
+@keyframes glitch-shift {
+  0%, 100% { transform: translate(0, 0); }
+  20%      { transform: translate(-1px, 1px); }
+  40%      { transform: translate(1px, -1px); }
+  60%      { transform: translate(-1px, -1px); }
+  80%      { transform: translate(1px, 1px); }
+}
+
+.glitch-on-hover:hover {
+  animation: glitch-shift 0.18s steps(2) 4;
+  text-shadow:
+    1px 0 0 #ff003c,
+    -1px 0 0 #00f0ff,
+    0 0 6px var(--fg-bright),
+    0 0 16px var(--fg-bright);
+}
+
+/* Apparition séquentielle des sections (server-side, pure CSS) */
+@keyframes section-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.section-in {
+  animation: section-in 0.55s ease-out both;
+}
+
+/* Liens : sobre par défaut, glow + caractère ">" au hover */
+a {
+  color: var(--fg);
+  text-decoration: none;
+  transition: color 120ms ease, text-shadow 120ms ease;
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--fg-bright);
+  text-shadow: 0 0 4px var(--fg-bright), 0 0 12px var(--fg-bright);
+  outline: none;
+}
+
+/* Sélection texte */
+::selection {
+  background: var(--fg);
+  color: var(--bg-deep);
+  text-shadow: none;
+}
+
+/* Scrollbar discrète */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--muted); }
+::-webkit-scrollbar-thumb:hover { background: var(--fg-dim); }
+
+/* Désactive les animations pour les utilisateurs qui préfèrent moins de mouvement */
+@media (prefers-reduced-motion: reduce) {
+  .cursor-blink { animation: none; opacity: 1; }
+}
+
+/* Désactive l'effet CRT pour les utilisateurs qui préfèrent un contraste plus élevé */
+@media (prefers-contrast: more) {
+  body::before, body::after { display: none; }
+  body { text-shadow: none; }
 }
