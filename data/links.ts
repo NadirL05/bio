@@ -50,8 +50,13 @@ export const projects: Project[] = [
     desc: "SaaS resto — next.js 16, supabase, stripe · clique 'Voir la démo'",
     badge: "live",
   },
+  {
+    name: "plu-ia",
+    url: "https://sas-plu-3d.vercel.app/demo",
+    desc: "analyse foncière IA + visu 3D — démo interactive, 3 scénarios, sans signup",
+    badge: "beta",
+  },
   // Autres sites Vercel disponibles (à activer si tu veux les afficher) :
-  // { name: "sas-plu-3d",   url: "https://sas-plu-3d.vercel.app",   desc: "...", badge: "live" },
   // { name: "cds",          url: "https://cds-dun.vercel.app",      desc: "...", badge: "live" },
   // { name: "airfryer",     url: "https://airfryer-five.vercel.app", desc: "...", badge: "live" },
   // { name: "electromed",   url: "https://electromed-stimulation.vercel.app", desc: "...", badge: "live" },
